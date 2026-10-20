@@ -4,7 +4,7 @@ export const configureCORS = (app) => {
   console.logD('DEBUG: Module: cors: ')
   const corsOptions = {
     origin: [
-      'https://livestrongai.github.io',
+      'https://chris-prototype.github.io',
       'https://caaker.github.io',
       /^https:\/\/.*\.github\.dev(:[0-9]+)?$/
     ],
