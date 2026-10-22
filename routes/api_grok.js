@@ -1,6 +1,6 @@
-import OpenAI from 'openai'; // grok only has a python api currently
-import { Router } from 'express';
-const router = Router();
+import OpenAI from 'openai' // grok only has a python api currently
+import { Router } from 'express'
+const router = Router()
 
 // const grok = new OpenAI({
 //   apiKey: process.env.XAI_API_KEY,
@@ -19,4 +19,4 @@ const router = Router();
 //   res.json(completion);
 // });
 
-export { router as api_grok };
+export { router as api_grok }

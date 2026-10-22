@@ -2,12 +2,12 @@ import passport from 'passport'
 import { Strategy as GoogleAuth } from 'passport-google-oauth20'
 import { getOrSaveUser, serialize, deserialize } from './passport/passport-db.js'
 
-let connection_string
+let connectionString
 if (process.env.PASSPORT) {
-  connection_string = JSON.parse(process.env.PASSPORT).Google
+  connectionString = JSON.parse(process.env.PASSPORT).Google
 }
-if (connection_string) {
-  const GAObject = new GoogleAuth(connection_string, getOrSaveUser)
+if (connectionString) {
+  const GAObject = new GoogleAuth(connectionString, getOrSaveUser)
   passport.use('google', GAObject)
   passport.serializeUser(serialize)
   passport.deserializeUser(deserialize)

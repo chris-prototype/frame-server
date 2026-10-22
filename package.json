@@ -2,6 +2,11 @@
   "type": "module",
   "engines": {
     "node": "24.x"
+  }, 
+  "standard": {
+    "ignore": [
+      "bundle.js"
+    ]
   },
   "scripts": {
     "server": "node index.js",

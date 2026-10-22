@@ -3,8 +3,8 @@ import { clientConnected, clientClosed, receivedFingerPrint, receivedEcho } from
 
 function startWebsocketServer (server) {
   console.logD('DEBUG: Module: websocket: ')
-  const ws_server = new WebSocketServer({ server })
-  ws_server.on('connection', clientConnection)
+  const wsServer = new WebSocketServer({ server })
+  wsServer.on('connection', clientConnection)
 }
 
 function clientConnection (socket) {

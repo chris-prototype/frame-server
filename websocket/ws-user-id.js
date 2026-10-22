@@ -1,5 +1,5 @@
-let iter = 0;
+let iter = 0
 
-export function getClientID() {
-  return iter++;
+export function getClientID () {
+  return iter++
 }

@@ -1,7 +1,7 @@
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 
-const session_options = {
+const sessionOptions = {
 
   // 'name' is the name of the session cookie
   name: 'livelong-1',
@@ -38,4 +38,4 @@ const session_options = {
   }
 }
 
-export const session_instance = session(session_options)
+export const sessionInstance = session(sessionOptions)

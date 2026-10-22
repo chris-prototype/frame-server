@@ -4,7 +4,7 @@ import express from 'express'
 
 import { configure } from './mod_00__configure.js'
 
-import { session_instance } from './mod_10_session.js'
+import { session } from './mod_10_session.js'
 import { passport } from './mod_10_passport.js'
 import { router } from './routes/index.js'
 import { detectErrors } from './mod_20_detectErrors.js'
@@ -18,7 +18,7 @@ configure(app)
 
 // configure set 1 - sessions, passport
 //   passport is currently the first use of internal dependency
-app.use(session_instance)
+app.use(session)
 app.use(passport.initialize())
 app.use(passport.session())
 

@@ -11,5 +11,5 @@ global.time = () => new Date().toLocaleTimeString()
 
 // moved here to make index.js more readable
 console.logD('---------*---------*---------*---------*---------*---------*---------*---------*---------*---------*')
-console.logD('DEBUG: index.js: time: ' + time())
+console.logD('DEBUG: index.js: time: ' + global.time())
 console.logD('DEBUG: current node version: ' + process.version)
