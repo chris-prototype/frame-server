@@ -1,13 +1,13 @@
 import mongoose from 'mongoose'
 
-const connection_string = process.env.MONGO
+const connectionString = process.env.MONGO
 
 // 10 seconds timeout
-const connection_params = {
+const connectionParams = {
   serverSelectionTimeoutMS: 10000
 }
 
-mongoose.connect(connection_string, connection_params).then(() => {
+mongoose.connect(connectionString, connectionParams).then(() => {
   console.logD('DEBUG: mongoose: connected: ', 'green')
 }).catch((err) => {
   console.logD('DEBUG: mongoose: error: not connected: ', 'red')
