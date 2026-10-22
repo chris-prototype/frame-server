@@ -17,5 +17,8 @@
     "passport": "latest",
     "passport-google-oauth20": "latest",
     "ws": "latest"
+  },
+  "devDependencies": {
+    "standard": "^17.1.2"
   }
 }
