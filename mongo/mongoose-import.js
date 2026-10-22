@@ -4,6 +4,10 @@ const FILE = 'articles.json'
 
 // Use fs which is built into node.js to read the file contents of articles.json
 fs.readFile(FILE, 'utf8', (err, contents) => {
+  if (err) {
+    console.log(err)
+    return
+  }
   parseFile(contents)
 })
 

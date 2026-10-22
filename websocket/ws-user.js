@@ -4,24 +4,24 @@ const users = new Map()
 const clientConnected = (socket) => {
   const id = getClientID()
   socket._id = id
-  const user_object = {
+  const userObject = {
     id,
     type: 'connected'
   }
-  users.set(id, user_object)
+  users.set(id, userObject)
 }
 const clientClosed = (socket) => {
   users.delete(socket._id)
 }
 const receivedFingerPrint = (socket, obj) => {
   const id = socket._id
-  const user_object = {
+  const userObject = {
     id,
     fingerprint: obj.message,
     type: 'fingerprint'
   }
-  users.set(id, user_object)
-  sendObject(user_object, socket)
+  users.set(id, userObject)
+  sendObject(userObject, socket)
 }
 const receivedEcho = (socket, obj) => {
   sendObject(obj.message, socket)

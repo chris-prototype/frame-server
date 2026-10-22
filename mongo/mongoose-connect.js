@@ -11,4 +11,5 @@ mongoose.connect(connectionString, connectionParams).then(() => {
   console.logD('DEBUG: mongoose: connected: ', 'green')
 }).catch((err) => {
   console.logD('DEBUG: mongoose: error: not connected: ', 'red')
+  console.log(err)
 })
