@@ -25,8 +25,8 @@ function serialize (profile, done) {
   done(null, profile.id_google)
 }
 
-function deserialize (id_google, done) {
-  database.getUser(id_google).then((res) => {
+function deserialize (idGoogle, done) {
+  database.getUser(idGoogle).then((res) => {
     done(null, res[0])
   })
 }

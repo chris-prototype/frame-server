@@ -18,4 +18,4 @@ router.post('/message', async (req, res) => {
   })
 })
 
-export { router as api_chatgpt }
+export { router as chatgpt }
