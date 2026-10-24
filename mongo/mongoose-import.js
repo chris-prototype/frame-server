@@ -1,30 +1,38 @@
-const fs = require('fs')
+const fs = require('fs/promises')
 const DBM = require('./mongoose')
 const FILE = 'articles.json'
 
-// Use fs which is built into node.js to read the file contents of articles.json
-fs.readFile(FILE, 'utf8', (err, contents) => {
-  if (err) {
-    console.log(err)
-    return
+async function main () {
+  try {
+    const contents = await fs.readFile(FILE, 'utf8')
+    await parseFile(contents)
+  } catch (err) {
+    console.error(err)
   }
-  parseFile(contents)
-})
-
-// the export file from Compass create JSON in the form of an array of objects
-async function parseFile (contents) {
-  await loopThroughData(JSON.parse(contents))
 }
 
-// loop through this array and save each object to the database
+async function parseFile (contents) {
+  try {
+    const data = JSON.parse(contents)
+    await loopThroughData(data)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 async function loopThroughData (array) {
   for (let i = array.length - 1; i >= 0; i--) {
-    await saveToDB(i, array[i])
+    try {
+      await saveToDB(i, array[i])
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 
-// save to the database
 async function saveToDB (i, article) {
   await DBM.saveArticle(article)
   console.log('article saved', i)
 }
+
+main()

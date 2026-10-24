@@ -1,32 +1,30 @@
-## Error Handling & Resource Management (Generation 5 Standard)
+## Error Handling Standard (Generation 4: Async/Await & Try...Catch)
 
-When writing or refactoring asynchronous Node.js code, agents must follow the **Generation 5 Error Detection and Resource Management** standard:
+When writing or refactoring asynchronous Node.js code, agents must follow the **Generation 4 Error Handling** standard:
 
-1. **Explicit Resource Management (`await using`):**
-   - Always use `await using` (or `using`) for any manual resource acquisition (e.g., `fs.open()`, file handles, database connection pools, streams, sockets).
-   - This replaces manual `try...finally` blocks for deterministic cleanup via `Symbol.asyncDispose`.
-
-2. **Error Boundaries & Logging (`try...catch`):**
-   - Always wrap resource-acquisition and async execution blocks in `try...catch` to handle errors gracefully.
-   - Do **not** rely on raw `console.log(err)` or unhandled rejections. 
-   - Log errors using structured loggers (e.g., Pino, Winston) attaching rich context objects (e.g., `logger.error({ err, filePath }, "Operation failed")`).
-
-3. **Operational Error Typing:**
-   - Throw custom, operational error classes that inherit from `Error` (e.g., `class AppError extends Error { isOperational = true; ... }`) rather than throwing generic strings or native errors without context. Use `{ cause: err }` to preserve error chains.
+1. **Modern Asynchronous Syntax:** Always use `async/await`. Avoid legacy error-first callbacks and complex promise chaining (`.then().catch()`).
+2. **Standard Error Boundaries (`try...catch`):** Wrap asynchronous operations, file I/O, and database queries in standard `try...catch` blocks to handle errors gracefully.
+3. **Clean Error Reporting:** Log errors directly inside catch blocks using standard logging (`console.error`) without over-engineering complex operational error hierarchies or explicit resource disposal syntax.
 
 ### Example Pattern:
 ```javascript
-const fs = require('fs/promises');
+const fs = require('fs/promises')
+const DBM = require('./mongoose')
+const FILE = 'articles.json'
 
-async function processSecureFile(filePath) {
+async function processArticles () {
   try {
-    // 1. Automatic resource cleanup on exit or throw
-    await using fileHandle = await fs.open(filePath, 'r');
-    const contents = await fileHandle.readFile('utf8');
-    return JSON.parse(contents);
+    const contents = await fs.readFile(FILE, 'utf8')
+    const data = JSON.parse(contents)
+    for (let i = data.length - 1; i >= 0; i--) {
+      try {
+        await DBM.saveArticle(data[i])
+        console.log('article saved', i)
+      } catch (err) {
+        console.error(err)
+      }
+    }
   } catch (err) {
-    // 2. Structured logging & custom error wrapping
-    logger.error({ err, filePath }, "Failed to securely process file");
-    throw new AppError("File processing pipeline failed", { cause: err });
+    console.error(err)
   }
 }
