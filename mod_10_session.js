@@ -6,8 +6,8 @@ const sessionOptions = {
   // 'name' is the name of the session cookie
   name: 'livelong-1',
 
-  // 'secret' is used to sign the cookie, and should be moved to an environment variable or similar
-  secret: 'iamnotasecret016',
+  // 'secret' is used to sign the cookie
+  secret: process.env.SESSION || 'development-only',
 
   // only this property was added to update to use mongodb
   store: MongoStore.create({

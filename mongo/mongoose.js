@@ -8,7 +8,7 @@ const updateFingerPrint = (id, obj) => model.FingerPrint.updateOne({ _id: id }, 
 const deleteFingerPrint = (id) => model.FingerPrint.deleteOne({ _id: id })
 
 // ARTICLE
-const getArticle = (id) => model.Article.find({ id_google: id })
+const getArticle = (id) => model.Article.find({ _id: id })
 const saveArticle = (obj) => new model.Article(obj).save()
 const updateArticle = (id, obj) => model.Article.updateOne({ _id: id }, obj)
 const deleteArticle = (id) => model.Article.deleteOne({ _id: id })
