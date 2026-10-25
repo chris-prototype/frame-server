@@ -29,3 +29,5 @@ detectErrors(app)
 // start - https server, websocket server
 const server = startServer(app)
 startWebsocketServer(server)
+console.logD('DEBUG: End of Code')
+
