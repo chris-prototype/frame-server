@@ -6,6 +6,7 @@ router.get('/google', (req, res, next) => {
   // referer holds the originating URL
   const referer = req.get('referer')
   console.logD('DEBUG: routes: /auth/google: ', 'blue')
+  console.logD(referer, 'blue')
   const config = {
     scope: ['email', 'profile'],
     state: referer
@@ -20,7 +21,7 @@ function getHost (req, res, next) {
   console.logD('DEBUG: routes: /auth/google/callback: ', 'blue')
   const referer = req.query.state
   if (!referer) {
-    res.status(400).send('bad request. missing req.query.state')
+    // res.status(400).send('bad request. missing req.query.state')
     console.logD(referer, 'blue')
   } else {
     console.logD(referer, 'blue')
