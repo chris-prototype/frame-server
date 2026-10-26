@@ -3,8 +3,8 @@ import MongoStore from 'connect-mongo'
 
 const sessionOptions = {
 
-  // 'name' is the name of the session cookie
-  name: 'livelong-1',
+  // 'name' is the name of the session cookie - view in browser debugger
+  name: 'express-session-chris',
 
   // 'secret' is used to sign the cookie
   secret: process.env.SESSION || 'development-only',
