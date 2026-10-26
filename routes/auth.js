@@ -2,8 +2,6 @@ import passport from 'passport'
 import { Router } from 'express'
 const router = Router()
 
-// on /auth
-
 router.get('/google', (req, res, next) => {
   // referer holds the originating URL
   const referer = req.get('referer')
@@ -19,8 +17,13 @@ router.get('/google', (req, res, next) => {
 
 router.get('/google/callback', getHost, authenticateWrap)
 function getHost (req, res, next) {
-  const referer = req.query.state
   console.logD('DEBUG: routes: /auth/google/callback: ', 'blue')
+  const referer = req.query.state
+  if (!referer) {
+    return res.status(400).send('bad request. missing req.query.state')
+  } else {
+    console.logD(referer, 'blue')
+  }
   req.auth_options = { successRedirect: referer, failureRedirect: referer }
   next()
 }
