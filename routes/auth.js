@@ -20,7 +20,8 @@ function getHost (req, res, next) {
   console.logD('DEBUG: routes: /auth/google/callback: ', 'blue')
   const referer = req.query.state
   if (!referer) {
-    return res.status(400).send('bad request. missing req.query.state')
+    res.status(400).send('bad request. missing req.query.state')
+    console.logD(referer, 'blue')
   } else {
     console.logD(referer, 'blue')
   }
