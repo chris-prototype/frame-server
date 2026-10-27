@@ -3,15 +3,13 @@ import { Router } from 'express'
 const router = Router()
 
 router.get('/google', (req, res, next) => {
-  // referer holds the originating URL
-  const referer = req.get('referer')
+  const returnURL = req.query.returnURL 
   console.logD('DEBUG: routes: /auth/google: ', 'blue')
-  console.logD(referer, 'blue')
+  console.logD(returnURL, 'blue')
   const config = {
     scope: ['email', 'profile'],
-    state: referer
+    state: returnURL
   }
-
   // redirects the browser to google's server ( accounts.google.com ) via 302
   passport.authenticate('google', config)(req, res, next)
 })
@@ -19,14 +17,14 @@ router.get('/google', (req, res, next) => {
 router.get('/google/callback', getHost, authenticateWrap)
 function getHost (req, res, next) {
   console.logD('DEBUG: routes: /auth/google/callback: ', 'blue')
-  const referer = req.query.state
-  if (!referer) {
-    // res.status(400).send('bad request. missing req.query.state')
-    console.logD(referer, 'blue')
+  const returnURL = req.query.state
+  if (!returnURL) {
+    // res.status(400).send('bad request. missing req.query.state - returnURL')
+    console.logD(returnURL, 'blue')
   } else {
-    console.logD(referer, 'blue')
+    console.logD(returnURL, 'blue')
   }
-  req.auth_options = { successRedirect: referer, failureRedirect: referer }
+  req.auth_options = { successRedirect: returnURL, failureRedirect: returnURL }
   next()
 }
 function authenticateWrap (req, res, next) {
