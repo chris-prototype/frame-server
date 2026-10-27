@@ -1,6 +1,6 @@
 # Frame Server
 
-A lightweight backend prototype for a browser-based product experience, built with Express and supporting authentication, real-time communication, and third-party API integrations.
+A lightweight backend prototype, built with Express and supporting authentication, real-time communication, and third-party API integrations.
 
 ## What this project does
 
