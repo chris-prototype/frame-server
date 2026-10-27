@@ -25,26 +25,3 @@ For this project, the default rule is:
 - Prefer direct usage and immediate failure over speculative safety checks.
 
 This policy is intentional: the project is a prototype, and the team wants to keep the code fast to iterate and easy to understand. Avoid defensive coding patterns that hide missing configuration or turn absent environment variables into complicated fallback logic.
-
-### Error Handling Example Pattern:
-```javascript
-const fs = require('fs/promises')
-const DBM = require('./mongoose')
-const FILE = 'articles.json'
-
-async function processArticles () {
-  try {
-    const contents = await fs.readFile(FILE, 'utf8')
-    const data = JSON.parse(contents)
-    for (let i = data.length - 1; i >= 0; i--) {
-      try {
-        await DBM.saveArticle(data[i])
-        console.log('article saved', i)
-      } catch (err) {
-        console.error(err)
-      }
-    }
-  } catch (err) {
-    console.error(err)
-  }
-}
