@@ -12,6 +12,7 @@ const UserSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   pic_url: { type: String, required: true },
+  role: { type: String, required: true, default: 'user', enum: ['user', 'admin'] },
   timestamp: { type: Date, required: true, default: Date.now }
 })
 
