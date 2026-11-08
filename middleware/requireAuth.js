@@ -4,6 +4,11 @@ const requireAuth = (req, res, next) => {
       error: 'Authentication required'
     })
   }
+  if (!req.user || req.user.role !== 'admin') {
+    return res.status(403).json({
+      error: 'Access denied: Admin privileges required'
+    })
+  }
   next()
 }
 
